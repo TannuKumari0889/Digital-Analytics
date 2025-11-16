@@ -11,7 +11,7 @@ st.title("📈 Business Overview")
 total_orders=len(orders['order_id'])
 total_revenue=round(orders['price_usd'].sum()/1000000,2)
 total_profit=round((orders['price_usd'].sum()-orders['cogs_usd'].sum())/1000000,2)
-AOV=(orders['price_usd'].sum())*100/total_orders
+AOV=orders['price_usd'].sum()/total_orders
 refund_rate=len(refunds['order_item_refund_id'])*100/total_orders
 cvr=total_orders*100/len(sessions['website_session_id'])
 
