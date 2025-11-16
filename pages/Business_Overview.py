@@ -9,10 +9,11 @@ st.title("📈 Business Overview")
 
 
 total_orders=len(orders['order_id'])
-total_revenue=orders['price_usd'].sum()
+total_revenue=round(orders['price_usd'].sum()/1000000,2)
+
 
 #-kpis--------------
 col1,col2=st.columns(2)
 col1.metric('Total Orders',total_orders)
-col2.metric('Total Revenue',total_revenue)
+col2.metric('Total Revenue',total_revenue,"M")
 
