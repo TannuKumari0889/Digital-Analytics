@@ -152,7 +152,7 @@ elif page == "Business Overview":
     with col6:
         st.markdown(
             f"""
-            <div class='card'>
+            <div class='kpi-card'>
                 <h3>Total Profit</h3>
                 <p>${round(Total_Profit_M, 2)} M</p>
             </div>
