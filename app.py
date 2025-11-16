@@ -74,7 +74,8 @@ elif page == "Business Overview":
     st.write("- Average Order Value (AOV)",round(Aov,2),"$")
     refund_rate=df_refunds["order_item_refund_id"].nunique()*100/ Total_orders
     st.write("- Refund Rate",round(refund_rate,2),"%")
-    st.write("- Conversion Rate")
+    cvr=Total_orders*100/df_sessions["website_session_id"].nunique()
+    st.write("- Conversion Rate",round(cvr,2),"%")
 
     # Example KPI (you can replace later)
     st.subheader("Sample KPI")
