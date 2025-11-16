@@ -6,6 +6,7 @@ from data_tables import load_data
 sessions, pageviews, products, orders, items, refunds = load_data()
 
 st.title("📈 Business Overview")
+st.markdown("<h1 style='text-align:center;'>📈 Business Overview</h1>", unsafe_allow_html=True)
 
 total_orders=len(orders['order_id'])
 total_revenue=orders['price_usd'].sum()
