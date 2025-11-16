@@ -428,17 +428,101 @@ elif page == "Website Analysis":
 
 
 
-# ------------------------------
-# PAGE 5: MARKETING ANALYSIS
-# ------------------------------
+# -------------------------------
+# PAGE: MARKETING ANALYSIS
+# -------------------------------
 elif page == "Marketing Analysis":
-    st.title("🎯 Marketing Channel Analysis")
+    st.markdown("<h1 style='text-align: center;'>📈 Marketing Analysis</h1>", unsafe_allow_html=True)
+    st.write("")
 
-    st.write("Show insights like:")
-    st.write("- Traffic by channel")
-    st.write("- Conversion by channel")
-    st.write("- CPA, CAC metrics")
-    st.write("- Channel-wise revenue & ROI")
+    # --- KPI CALCULATIONS ---
 
-    st.dataframe(df_pageviews.head())
+    # 1️⃣ Total Users Acquired
+    Total_Users = df_sessions["user_id"].nunique()
+
+    # 2️⃣ Top UTM Source
+    top_source_counts = df_sessions["utm_source"].value_counts().reset_index()
+    top_source_counts.columns = ["utm_source", "count"]
+    Top_UTM_Source = top_source_counts.loc[0, "utm_source"]
+    Top_UTM_Source_Count = top_source_counts.loc[0, "count"]
+
+    # 3️⃣ Top Performing Campaign
+    top_campaign_counts = df_sessions["utm_campaign"].value_counts().reset_index()
+    top_campaign_counts.columns = ["utm_campaign", "count"]
+    Top_UTM_Campaign = top_campaign_counts.loc[0, "utm_campaign"]
+    Top_UTM_Campaign_Count = top_campaign_counts.loc[0, "count"]
+
+    # 4️⃣ Conversion Rate by Campaign
+    orders_with_campaign = df_orders.merge(df_sessions[["website_session_id", "utm_campaign"]],
+                                           on="website_session_id", how="left")
+    conv_rate_campaign = (orders_with_campaign.groupby("utm_campaign")["order_id"].nunique() /
+                          df_sessions.groupby("utm_campaign")["website_session_id"].nunique() * 100)
+    Top_Conv_Campaign = conv_rate_campaign.idxmax()
+    Top_Conv_Campaign_Rate = round(conv_rate_campaign.max(), 2)
+
+    # 5️⃣ Average Revenue per Campaign
+    revenue_campaign = orders_with_campaign.groupby("utm_campaign")["price_usd"].sum()
+    Top_Revenue_Campaign = revenue_campaign.idxmax()
+    Top_Revenue_Campaign_Value = round(revenue_campaign.max(), 2)
+
+    # 6️⃣ Bounce Rate by Campaign
+    first_pageviews = (
+        df_pageviews.sort_values(["website_session_id", "created_at"])
+        .groupby("website_session_id")
+        .first()
+        .reset_index()
+    )
+    pageviews_per_session = df_pageviews.groupby("website_session_id")["website_pageview_id"].count()
+    Bounce_Rate = (pageviews_per_session[pageviews_per_session==1].count() / df_sessions.shape[0]) * 100
+
+    # --- KPI CARD CSS ---
+    st.markdown("""
+        <style>
+        .kpi-card {
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #f0f2f6;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            margin: 10px;
+        }
+        .kpi-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .kpi-value {
+            font-size: 26px;
+            font-weight: bold;
+            color: #2e86de;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # --- KPI GRID: 2 ROWS × 3 COLUMNS ---
+    cols = st.columns(3)
+    kpi_values = [
+        ("Total Users Acquired", Total_Users),
+        ("Top UTM Source", f"{Top_UTM_Source} ({Top_UTM_Source_Count})"),
+        ("Top Campaign (Sessions)", f"{Top_UTM_Campaign} ({Top_UTM_Campaign_Count})"),
+        ("Top Campaign (Conversion Rate)", f"{Top_Conv_Campaign} ({Top_Conv_Campaign_Rate}%)"),
+        ("Top Campaign (Revenue)", f"{Top_Revenue_Campaign} (${Top_Revenue_Campaign_Value})"),
+        ("Overall Bounce Rate", f"{round(Bounce_Rate,2)}%"),
+    ]
+
+    # Display cards in rows
+    for i, (title, value) in enumerate(kpi_values):
+        with cols[i % 3]:
+            st.markdown(
+                f"""
+                <div class='kpi-card'>
+                    <div class='kpi-title'>{title}</div>
+                    <div class='kpi-value'>{value}</div>
+                </div>
+                """, unsafe_allow_html=True
+            )
+        # After 3 columns, reset for next row
+        if i % 3 == 2:
+            cols = st.columns(3)
+
 
