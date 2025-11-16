@@ -7,7 +7,7 @@ st.set_page_config(page_title="Digital Analytics Dashboard", layout="wide")
 
 
 
-df_sessions, df_pageviews, df_products, df_orders, df_items, df_refunds = load_data()
+
 
 
 # ------------------------------
