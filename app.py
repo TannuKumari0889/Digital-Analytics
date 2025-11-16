@@ -174,19 +174,127 @@ elif page == "Business Overview":
 
 
 
-# ------------------------------
+# -------------------------------
 # PAGE 3: PRODUCT ANALYSIS
-# ------------------------------
+# -------------------------------
 elif page == "Product Analysis":
     st.title("📦 Product Analysis")
+    st.write("")
 
-    st.write("Show charts like:")
-    st.write("- Top selling products")
-    st.write("- Revenue by category")
-    st.write("- Refunds by product")
-    st.write("- Product conversion funnel")
+    # --- PRODUCT KPIs CALCULATION ---
 
-    st.dataframe(df_products.head())
+    # TOTAL PRODUCTS
+    Total_Products = df_products["product_id"].nunique()
+
+    # BEST & LEAST PERFORMING PRODUCTS (BY REVENUE)
+    product_revenue = (
+        df_order_items
+        .groupby("product_id")["price_usd"]
+        .sum()
+        .reset_index()
+        .merge(df_products, on="product_id", how="left")
+    )
+
+    best_product_row = product_revenue.loc[product_revenue["price_usd"].idxmax()]
+    Best_Product = best_product_row["product_name"]
+    Best_Product_Revenue = best_product_row["price_usd"]
+
+    least_product_row = product_revenue.loc[product_revenue["price_usd"].idxmin()]
+    Least_Product = least_product_row["product_name"]
+    Least_Product_Revenue = least_product_row["price_usd"]
+
+    # MOST REFUNDED PRODUCT
+    refunds_with_products = (
+        df_refunds
+        .merge(df_order_items[["order_item_id", "product_id"]], on="order_item_id", how="left")
+        .merge(df_products, on="product_id", how="left")
+    )
+
+    refund_amounts = (
+        refunds_with_products
+        .groupby("product_id")["refund_amount_usd"]
+        .sum()
+        .reset_index()
+        .merge(df_products, on="product_id", how="left")
+    )
+
+    most_refunded_row = refund_amounts.loc[refund_amounts["refund_amount_usd"].idxmax()]
+    Most_Refunded_Product = most_refunded_row["product_name"]
+    Most_Refunded_Amount = most_refunded_row["refund_amount_usd"]
+
+    # --- KPI CARD STYLING (reuse your style) ---
+    st.markdown("""
+        <style>
+        .kpi-card {
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #f0f2f6;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            margin: 10px;
+        }
+        .kpi-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .kpi-value {
+            font-size: 26px;
+            font-weight: bold;
+            color: #2e86de;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # --- KPI ROW ---
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Total Products</div>
+                <div class='kpi-value'>{Total_Products}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col2:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Best Product</div>
+                <div class='kpi-value'>{Best_Product}<br>${round(Best_Product_Revenue,2)}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col3:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Least Product</div>
+                <div class='kpi-value'>{Least_Product}<br>${round(Least_Product_Revenue,2)}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col4:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Most Refunded Product</div>
+                <div class='kpi-value'>{Most_Refunded_Product}<br>${round(Most_Refunded_Amount,2)}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    
+
 
 
 
