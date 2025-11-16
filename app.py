@@ -534,7 +534,7 @@ elif page == "Marketing Analysis":
     
     source_counts = df_sessions['utm_source'].value_counts().reset_index()
     source_counts.columns = ['UTM Source', 'Sessions']
-    fig1 = py.bar(
+    fig1 = px.bar(
         source_counts,
         x='UTM Source',
         y='Sessions',
