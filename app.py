@@ -65,87 +65,110 @@ if page == "Welcome":
 # ------------------------------
 elif page == "Business Overview":
 
-    # ---- Centered Title ----
-    st.markdown("<h1 style='text-align: center;'>🏢 Business Overview</h1>", unsafe_allow_html=True)
-    st.write("")  # spacing
+    # ===== PAGE BACKGROUND COLOR =====
+    st.markdown("""
+    <style>
+    .main {
+        background-color: #001f3f !important;  /* Dark Blue */
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-    # ---- KPI Calculations ----
+    # Apply background style
+    st.markdown("<style>body {background-color: #001f3f;}</style>", unsafe_allow_html=True)
+
+    # ===== KPI CARD STYLING =====
+    st.markdown("""
+    <style>
+    .card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .card h3 {
+        font-size: 22px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #001f3f;
+    }
+    .card p {
+        font-size: 26px;
+        font-weight: bold;
+        margin: 0;
+        color: #2E86C1;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # ===== PAGE TITLE =====
+    st.markdown("<h1 style='text-align: center; font-size: 40px; color: white;'>🏢 Business Overview</h1>", 
+                unsafe_allow_html=True)
+
+    # --------------------
+    # CALCULATIONS
+    # --------------------
     Total_Revenue = df_orders["price_usd"].sum()
     Total_Revenue_M = Total_Revenue / 1_000_000
 
     Total_orders = df_orders["order_id"].nunique()
 
-    AOV = df_orders["price_usd"].sum() / Total_orders
+    AOV = Total_Revenue / Total_orders
+
+    Total_Profit = (df_orders["price_usd"] - df_orders["cogs_usd"]).sum()
+    Total_Profit_M = Total_Profit / 1_000_000
 
     refund_rate = df_refunds["order_item_refund_id"].nunique() * 100 / Total_orders
 
-    cvr = Total_orders * 100 / df_sessions["website_session_id"].nunique()
+    CVR = Total_orders * 100 / df_sessions["website_session_id"].nunique()
 
-    # ---- KPI CARD STYLING ----
-    st.markdown("""
-        <style>
-        .kpi-card {
-            padding: 20px;
-            border-radius: 12px;
-            background-color: #f0f2f6;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            margin: 10px;
-        }
-        .kpi-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-        }
-        .kpi-value {
-            font-size: 28px;
-            font-weight: bold;
-            color: #2e86de;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    # ---- 3 KPI cards in a row ----
+    # --------------------
+    # KPI CARDS LAYOUT
+    # --------------------
     col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.markdown(
-            f"<div class='kpi-card'><div class='kpi-title'>Total Revenue</div>"
-            f"<div class='kpi-value'>{round(Total_Revenue_M,2)} M</div></div>",
-            unsafe_allow_html=True
-        )
-
-    with col2:
-        st.markdown(
-            f"<div class='kpi-card'><div class='kpi-title'>Total Orders</div>"
-            f"<div class='kpi-value'>{round(Total_orders/1000,2)} K</div></div>",
-            unsafe_allow_html=True
-        )
-
-    with col3:
-        st.markdown(
-            f"<div class='kpi-card'><div class='kpi-title'>Average Order Value</div>"
-            f"<div class='kpi-value'>${round(AOV,2)}</div></div>",
-            unsafe_allow_html=True
-        )
-
-    # ---- second row ----
     col4, col5 = st.columns(2)
 
+    with col1:
+        st.markdown(f"""
+        <div class='card'>
+            <h3>Total Revenue</h3>
+            <p>${round(Total_Revenue_M, 2)} M</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown(f"""
+        <div class='card'>
+            <h3>Total Orders</h3>
+            <p>{round(Total_orders/1000, 2)} K</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown(f"""
+        <div class='card'>
+            <h3>Average Order Value</h3>
+            <p>${round(AOV, 2)}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col4:
-        st.markdown(
-            f"<div class='kpi-card'><div class='kpi-title'>Refund Rate</div>"
-            f"<div class='kpi-value'>{round(refund_rate,2)}%</div></div>",
-            unsafe_allow_html=True
-        )
+        st.markdown(f"""
+        <div class='card'>
+            <h3>Total Profit</h3>
+            <p>${round(Total_Profit_M, 2)} M</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col5:
-        st.markdown(
-            f"<div class='kpi-card'><div class='kpi-title'>Conversion Rate</div>"
-            f"<div class='kpi-value'>{round(cvr,2)}%</div></div>",
-            unsafe_allow_html=True
-        )
-
+        st.markdown(f"""
+        <div class='card'>
+            <h3>Refund Rate</h3>
+            <p>{round(refund_rate, 2)}%</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 
 
