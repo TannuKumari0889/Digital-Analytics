@@ -1,78 +1,138 @@
 import streamlit as st
 import pandas as pd
 
-# -------- LOAD YOUR 6 TABLES AUTOMATICALLY ----------
+st.set_page_config(page_title="Digital Analytics Dashboard", layout="wide")
+
+# ------------------------------
+# LOAD DATA FROM GOOGLE DRIVE
+# ------------------------------
 @st.cache_data
 def load_data():
-    df_refund = pd.read_csv("data/order_item_refunds.csv")  # corrected name
-    df_items = pd.read_csv("data/order_items.csv")
-    df_orders = pd.read_csv("data/orders.csv")
-    df_products = pd.read_csv("data/products.csv")
-    df_pageviews = pd.read_csv("data/website_pageviews.csv")
-    df_sessions = pd.read_csv("data/website_sessions_cleaned.csv")
-    return df_refund, df_items, df_orders, df_products, df_pageviews, df_sessions
 
-df_refund, df_items, df_orders, df_products, df_pageviews, df_sessions = load_data()
+    url_sessions = "https://drive.google.com/uc?export=download&id=1ajuAwYDnG78lu5pk0Y3_gc6r-m9kbEkz"
+    url_pageviews = "https://drive.google.com/uc?export=download&id=1NFDWdWzxY2GxtFXdcGXnksWrCblNKa6T"
+    url_products = "https://drive.google.com/uc?export=download&id=1mxpg1D7Q8aYX85yO_-WyjY14JTRkDZnH"
+    url_orders = "https://drive.google.com/uc?export=download&id=19_UTwIKYRYyxTN5nTHtN5zIZthMdbaTr"
+    url_items = "https://drive.google.com/uc?export=download&id=1UQlE-HZHeOD9AZwGVWY5UdQaSKKZwV77"
+    url_refunds = "https://drive.google.com/uc?export=download&id=1au0qZVSF7Z3Gb4riDuCjkJ1D61--M9Kn"
 
-# --------- SIDEBAR NAVIGATION -----------
-st.sidebar.title("🔍 Navigation")
+    df_sessions = pd.read_csv(url_sessions)
+    df_pageviews = pd.read_csv(url_pageviews)
+    df_products = pd.read_csv(url_products)
+    df_orders = pd.read_csv(url_orders)
+    df_items = pd.read_csv(url_items)
+    df_refunds = pd.read_csv(url_refunds)
+
+    return df_sessions, df_pageviews, df_products, df_orders, df_items, df_refunds
+
+
+df_sessions, df_pageviews, df_products, df_orders, df_items, df_refunds = load_data()
+
+
+# ------------------------------
+# SIDEBAR NAVIGATION
+# ------------------------------
+st.sidebar.title("📊 Navigation")
 page = st.sidebar.radio(
-    "Go to",
-    ["Welcome Page", "Business Overview", "Product Analysis", "Website Analysis", "Marketing Analysis"]
+    "Go to page:",
+    ["Welcome", "Business Overview", "Product Analysis", "Website Analysis", "Marketing Analysis"]
 )
 
-# --------- PAGE 1: WELCOME PAGE -----------
-if page == "Welcome Page":
-    st.title("👋 Welcome to Digital Analytics App")
-    st.write("Use the left sidebar to navigate across dashboards.")
-    st.write("This app uses your 6 tables to generate business insights.")
 
-# --------- PAGE 2: BUSINESS OVERVIEW -----------
+# ------------------------------
+# PAGE 1: WELCOME
+# ------------------------------
+if page == "Welcome":
+    st.title("👋 Welcome to Digital Analytics Dashboard")
+    st.write(
+        """
+        This interactive dashboard helps you analyze:
+
+        - 🏢 **Business Overview**
+        - 📦 **Product Performance**
+        - 🌐 **Website Behaviour**
+        - 🎯 **Marketing Channel Performance**
+
+        Use the left navigation panel to explore all sections.
+        """
+    )
+
+    st.success("All six tables loaded successfully!")
+
+    st.subheader("Datasets Loaded:")
+    st.write("✔ Sessions:", df_sessions.shape)
+    st.write("✔ Pageviews:", df_pageviews.shape)
+    st.write("✔ Products:", df_products.shape)
+    st.write("✔ Orders:", df_orders.shape)
+    st.write("✔ Order Items:", df_items.shape)
+    st.write("✔ Refunds:", df_refunds.shape)
+
+
+
+# ------------------------------
+# PAGE 2: BUSINESS OVERVIEW
+# ------------------------------
 elif page == "Business Overview":
-    st.title("📊 Business Overview")
+    st.title("🏢 Business Overview")
 
-    # KPIs
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Total Orders", len(df_orders))
-    col2.metric("Total Products", len(df_products))
-    col3.metric("Total Sessions", len(df_sessions))
+    st.write("Here you will display KPIs like:")
+    st.write("- Total Revenue")
+    st.write("- Total Orders")
+    st.write("- Average Order Value (AOV)")
+    st.write("- Refund Rate")
+    st.write("- Conversion Rate")
 
-    # Revenue Trend
-    if "price_usd" in df_orders.columns:
-        st.subheader("Revenue Over Time")
-        df_orders["created_at"] = pd.to_datetime(df_orders["created_at"])
-        revenue = df_orders.groupby(df_orders["created_at"].dt.date)["price_usd"].sum()
-        st.line_chart(revenue)
+    # Example KPI (you can replace later)
+    st.subheader("Sample KPI")
+    total_orders = df_orders["order_id"].nunique()
+    st.metric("Total Orders", total_orders)
 
-# --------- PAGE 3: PRODUCT ANALYSIS -----------
+
+
+# ------------------------------
+# PAGE 3: PRODUCT ANALYSIS
+# ------------------------------
 elif page == "Product Analysis":
     st.title("📦 Product Analysis")
 
-    df_merged = df_items.merge(df_products, on="product_id", how="left")
+    st.write("Show charts like:")
+    st.write("- Top selling products")
+    st.write("- Revenue by category")
+    st.write("- Refunds by product")
+    st.write("- Product conversion funnel")
 
-    st.subheader("Top 10 Products by Revenue")
-    top_products = (
-        df_merged.groupby("product_name")["price_usd"]
-        .sum()
-        .sort_values(ascending=False)
-        .head(10)
-    )
-    st.bar_chart(top_products)
+    st.dataframe(df_products.head())
 
-# --------- PAGE 4: WEBSITE ANALYSIS -----------
+
+
+# ------------------------------
+# PAGE 4: WEBSITE ANALYSIS
+# ------------------------------
 elif page == "Website Analysis":
-    st.title("🌐 Website Analytics")
+    st.title("🌐 Website Behaviour Analysis")
 
-    df_pageviews["created_at"] = pd.to_datetime(df_pageviews["created_at"])
-    views_per_day = df_pageviews.groupby(df_pageviews["created_at"].dt.date)["website_pageview_id"].count()
+    st.write("You can show:")
+    st.write("- Sessions trend")
+    st.write("- Pageview trend")
+    st.write("- Bounce rate")
+    st.write("- Popular landing pages")
+    st.write("- Device performance")
 
-    st.subheader("Daily Website Pageviews")
-    st.line_chart(views_per_day)
+    st.dataframe(df_sessions.head())
 
-# --------- PAGE 5: MARKETING ANALYSIS -----------
+
+
+# ------------------------------
+# PAGE 5: MARKETING ANALYSIS
+# ------------------------------
 elif page == "Marketing Analysis":
-    st.title("📣 Marketing Performance")
+    st.title("🎯 Marketing Channel Analysis")
 
-    st.subheader("Sessions by UTM Source")
-    utm = df_sessions.groupby("utm_source")["website_session_id"].count()
-    st.bar_chart(utm)
+    st.write("Show insights like:")
+    st.write("- Traffic by channel")
+    st.write("- Conversion by channel")
+    st.write("- CPA, CAC metrics")
+    st.write("- Channel-wise revenue & ROI")
+
+    st.dataframe(df_pageviews.head())
+
