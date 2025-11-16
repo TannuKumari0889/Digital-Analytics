@@ -20,8 +20,6 @@ pages = {
     "📊 Marketing Analysis": "Marketing Analysis"
 }
 
-# Radio buttons for navigation
-page_choice = st.sidebar.radio("Select Page:", list(pages.keys()), index=0)
 
 # Map selection to actual page name
 current_page = pages[page_choice]
