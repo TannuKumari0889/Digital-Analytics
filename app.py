@@ -222,7 +222,7 @@ elif page == "Product Analysis":
     Most_Refunded_Product = most_refunded_row["product_name"]
     Most_Refunded_Amount = most_refunded_row["refund_amount_usd"]
 
-    # --- KPI CARD STYLING ---
+    # --- KPI CARD CSS ---
     st.markdown("""
         <style>
         .kpi-card {
@@ -246,58 +246,57 @@ elif page == "Product Analysis":
         </style>
     """, unsafe_allow_html=True)
 
-# --- 2 COLUMNS × 2 ROWS ---
+    # ---------------------------------------
+    #         KPI GRID: 2 COLUMNS × 2 ROWS
+    # ---------------------------------------
 
-# ROW 1
-col1, col2 = st.columns(2)
+    # ROW 1
+    col1, col2 = st.columns(2)
 
-with col1:
-    st.markdown(
-        f"""
-        <div class='kpi-card'>
-            <div class='kpi-title'>Total Products</div>
-            <div class='kpi-value'>{Total_Products}</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    with col1:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Total Products</div>
+                <div class='kpi-value'>{Total_Products}</div>
+            </div>
+            """, unsafe_allow_html=True
+        )
 
-with col2:
-    st.markdown(
-        f"""
-        <div class='kpi-card'>
-            <div class='kpi-title'>Best Product</div>
-            <div class='kpi-value'>{Best_Product}<br>${round(Best_Product_Revenue,2)}</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    with col2:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Best Product</div>
+                <div class='kpi-value'>{Best_Product}<br>${round(Best_Product_Revenue,2)}</div>
+            </div>
+            """, unsafe_allow_html=True
+        )
 
+    # ROW 2
+    col3, col4 = st.columns(2)
 
-# ROW 2
-col3, col4 = st.columns(2)
+    with col3:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Least Product</div>
+                <div class='kpi-value'>{Least_Product}<br>${round(Least_Product_Revenue,2)}</div>
+            </div>
+            """, unsafe_allow_html=True
+        )
 
-with col3:
-    st.markdown(
-        f"""
-        <div class='kpi-card'>
-            <div class='kpi-title'>Least Product</div>
-            <div class='kpi-value'>{Least_Product}<br>${round(Least_Product_Revenue,2)}</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    with col4:
+        st.markdown(
+            f"""
+            <div class='kpi-card'>
+                <div class='kpi-title'>Most Refunded Product</div>
+                <div class='kpi-value'>{Most_Refunded_Product}<br>${round(Most_Refunded_Amount,2)}</div>
+            </div>
+            """, unsafe_allow_html=True
+        )
 
-with col4:
-    st.markdown(
-        f"""
-        <div class='kpi-card'>
-            <div class='kpi-title'>Most Refunded Product</div>
-            <div class='kpi-value'>{Most_Refunded_Product}<br>${round(Most_Refunded_Amount,2)}</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    
 
 
 
