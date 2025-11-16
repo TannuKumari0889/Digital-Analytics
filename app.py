@@ -489,7 +489,7 @@ elif page == "Marketing Analysis":
             margin: 10px;
         }
         .kpi-title {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: bold;
             color: #333;
         }
