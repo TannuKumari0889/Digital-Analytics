@@ -68,9 +68,10 @@ elif page == "Business Overview":
     Total_Revenue = df_orders["price_usd"].sum()
     Total_Revenue_M = Total_Revenue / 1_000_000
     st.write("- Total Revenue (in Millions):", round(Total_Revenue_M, 2),"M")
-
-    st.write("- Total Orders")
-    st.write("- Average Order Value (AOV)")
+    Total_orders=df_orders["order_id"].nunique()
+    st.write("- Total Orders",Total_orders)
+    Aov=df_orders["price_usd"].sum()/Total_orders
+    st.write("- Average Order Value (AOV)",Aov)
     st.write("- Refund Rate")
     st.write("- Conversion Rate")
 
