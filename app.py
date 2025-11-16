@@ -481,7 +481,7 @@ elif page == "Marketing Analysis":
     st.markdown("""
         <style>
         .kpi-card {
-            padding: 20px;
+            padding: 15px;
             border-radius: 12px;
             background-color: #f0f2f6;
             text-align: center;
@@ -494,7 +494,7 @@ elif page == "Marketing Analysis":
             color: #333;
         }
         .kpi-value {
-            font-size: 26px;
+            font-size: 15px;
             font-weight: bold;
             color: #2e86de;
         }
