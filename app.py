@@ -148,14 +148,24 @@ elif page == "Business Overview":
             f"<div class='kpi-value'>{round(cvr,2)}%</div></div>",
             unsafe_allow_html=True
         )
+    with col6:
+        st.markdown(
+            f"<div class='kpi-card'><div class='kpi-title'>Total Profit</div>"
+            f"<div class='kpi-value'>${round(Total_Profit_M, 2)} M</div></div>",
+            ,unsafe_allow_html=True
+        )
+        
+        
+            
+             
+            
+            
+        
+
+        
          
-   with col6:
-    st.markdown(
-        f"""<div class='kpi-card'> <div class='kpi-title'>Total Profit</div>
-            <div class='kpi-value'>${round(Total_Profit_M, 2)} M</div></div>
-        """,
-        unsafe_allow_html=True
-    )
+         
+     
 
 
 
