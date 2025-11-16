@@ -13,7 +13,7 @@ total_revenue=round(orders['price_usd'].sum()/1000000,2)
 total_profit=round((orders['price_usd'].sum()-orders['cogs_usd'].sum())/1000000,2)
 AOV=total_revenue*100/total_orders
 refund_rate=len(refunds['order_item_refund_id'])*100/total_orders
-cvr=total_orders*100/len(sessions['website_sesssion_id'])
+cvr=total_orders*100/len(sessions['website_session_id'])
 
 
 #-kpis--------------
