@@ -576,6 +576,25 @@ st.plotly_chart(fig, use_container_width=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
 
+ # Chart 2: % Sessions by Campaign
+    utm_campaign_counts = df_sessions['utm_campaign'].value_counts().reset_index()
+    utm_campaign_counts.columns = ['Campaign','Sessions']
+    utm_campaign_counts['Percentage'] = (utm_campaign_counts['Sessions'] / Total_Sessions * 100).round(2)
+
+
+fig2 = px.bar(
+    utm_campaign_counts,
+    x='Campaign',
+    y='Percentage',
+    text='Percentage',
+    labels={'Campaign':'Campaign','Percentage':'% of Sessions'},
+    color='Percentage',
+    color_continuous_scale='Greens'
+)
+fig2.update_traces(texttemplate='%{text}%', textposition='inside')
+fig2.update_layout(title='Percentage of Sessions by Campaign', yaxis_title='% of Sessions', xaxis_title='Campaign')
+
+
 
  
 
