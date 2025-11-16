@@ -577,9 +577,9 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 
  # Chart 2: % Sessions by Campaign
- utm_campaign_counts = df_sessions['utm_campaign'].value_counts().reset_index()
- utm_campaign_counts.columns = ['Campaign','Sessions']
- utm_campaign_counts['Percentage'] = (utm_campaign_counts['Sessions'] / Total_Sessions * 100).round(2)
+utm_campaign_counts = df_sessions['utm_campaign'].value_counts().reset_index()
+utm_campaign_counts.columns = ['Campaign','Sessions']
+utm_campaign_counts['Percentage'] = (utm_campaign_counts['Sessions'] / Total_Sessions * 100).round(2)
 
 fig2 = px.bar(
     utm_campaign_counts,
