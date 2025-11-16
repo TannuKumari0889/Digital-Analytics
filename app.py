@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
+   
 
 st.set_page_config(page_title="Digital Analytics Dashboard", layout="wide")
 
@@ -526,12 +528,13 @@ elif page == "Marketing Analysis":
             cols = st.columns(3)
 
 
-  # ----------------------
+    # ----------------------
     # 1️⃣ Sessions by UTM Source
     # ----------------------
+    
     source_counts = df_sessions['utm_source'].value_counts().reset_index()
     source_counts.columns = ['UTM Source', 'Sessions']
-    fig1 = px.bar(
+    fig1 = py.bar(
         source_counts,
         x='UTM Source',
         y='Sessions',
