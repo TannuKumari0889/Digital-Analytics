@@ -310,20 +310,114 @@ elif page == "Product Analysis":
 
 
 
-# ------------------------------
+# -------------------------------
 # PAGE 4: WEBSITE ANALYSIS
-# ------------------------------
+# -------------------------------
 elif page == "Website Analysis":
-    st.title("🌐 Website Behaviour Analysis")
+    st.title("🌐 Website Analysis")
+    st.write("")
 
-    st.write("You can show:")
-    st.write("- Sessions trend")
-    st.write("- Pageview trend")
-    st.write("- Bounce rate")
-    st.write("- Popular landing pages")
-    st.write("- Device performance")
+    # --- KPI CALCULATIONS ---
 
-    st.dataframe(df_sessions.head())
+    # Total Sessions
+    Total_Sessions = df_sessions["website_session_id"].nunique()
+
+    # Entry Page: first pageview of each session
+    first_pageviews = (
+        df_pageviews.sort_values(["website_session_id", "created_at"])
+        .groupby("website_session_id")
+        .first()
+        .reset_index()
+    )
+    Top_Entry_Page_row = first_pageviews["pageview_url"].value_counts().reset_index().iloc[0]
+    Top_Entry_Page = Top_Entry_Page_row["index"]
+    Top_Entry_Page_Count = Top_Entry_Page_row["pageview_url"]
+
+    # Exit Page: last pageview of each session
+    last_pageviews = (
+        df_pageviews.sort_values(["website_session_id", "created_at"])
+        .groupby("website_session_id")
+        .last()
+        .reset_index()
+    )
+    Top_Exit_Page_row = last_pageviews["pageview_url"].value_counts().reset_index().iloc[0]
+    Top_Exit_Page = Top_Exit_Page_row["index"]
+    Top_Exit_Page_Count = Top_Exit_Page_row["pageview_url"]
+
+    # Bounce Rate
+    pageviews_per_session = df_pageviews.groupby("website_session_id")["website_pageview_id"].count()
+    Bounce_Rate = (pageviews_per_session[pageviews_per_session==1].count() / Total_Sessions) * 100
+
+    # Average Pages per Session
+    Avg_Pages_Per_Session = df_pageviews.shape[0] / Total_Sessions
+
+    # Top Device Type
+    Top_Device_Type_row = df_sessions["device_type"].value_counts().reset_index().iloc[0]
+    Top_Device_Type = Top_Device_Type_row["index"]
+    Top_Device_Count = Top_Device_Type_row["device_type"]
+
+    # Top UTM Source
+    Top_UTM_Source_row = df_sessions["utm_source"].value_counts().reset_index().iloc[0]
+    Top_UTM_Source = Top_UTM_Source_row["index"]
+    Top_UTM_Source_Count = Top_UTM_Source_row["utm_source"]
+
+    # Top UTM Campaign
+    Top_UTM_Campaign_row = df_sessions["utm_campaign"].value_counts().reset_index().iloc[0]
+    Top_UTM_Campaign = Top_UTM_Campaign_row["index"]
+    Top_UTM_Campaign_Count = Top_UTM_Campaign_row["utm_campaign"]
+
+    # --- KPI CARD CSS ---
+    st.markdown("""
+        <style>
+        .kpi-card {
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #f0f2f6;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            margin: 10px;
+        }
+        .kpi-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .kpi-value {
+            font-size: 26px;
+            font-weight: bold;
+            color: #2e86de;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # --- KPI GRID: 4x2 ---
+    cols = st.columns(4)
+    kpi_values = [
+        ("Total Sessions", Total_Sessions),
+        ("Bounce Rate", f"{round(Bounce_Rate,2)}%"),
+        ("Top Entry Page", f"{Top_Entry_Page} ({Top_Entry_Page_Count})"),
+        ("Top Exit Page", f"{Top_Exit_Page} ({Top_Exit_Page_Count})"),
+        ("Avg Pages/Session", round(Avg_Pages_Per_Session,2)),
+        ("Top Device Type", f"{Top_Device_Type} ({Top_Device_Count})"),
+        ("Top UTM Source", f"{Top_UTM_Source} ({Top_UTM_Source_Count})"),
+        ("Top UTM Campaign", f"{Top_UTM_Campaign} ({Top_UTM_Campaign_Count})"),
+    ]
+
+    # Display cards in 2 rows
+    for i, (title, value) in enumerate(kpi_values):
+        with cols[i % 4]:
+            st.markdown(
+                f"""
+                <div class='kpi-card'>
+                    <div class='kpi-title'>{title}</div>
+                    <div class='kpi-value'>{value}</div>
+                </div>
+                """, unsafe_allow_html=True
+            )
+        # After 4 columns, reset for next row
+        if i % 4 == 3:
+            cols = st.columns(4)
+
 
 
 
