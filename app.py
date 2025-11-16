@@ -532,8 +532,7 @@ elif page == "Marketing Analysis":
     # 1️⃣ Sessions by UTM Source
     # ----------------------
     
-  
-
+# Example data
 source_counts = df_sessions['utm_source'].value_counts().reset_index()
 source_counts.columns = ['UTM Source', 'Sessions']
 source_counts['Percentage'] = (source_counts['Sessions'] / source_counts['Sessions'].sum() * 100).round(2)
@@ -544,31 +543,38 @@ fig = px.bar(
     x='UTM Source',
     y='Percentage',
     text='Percentage',
-    title='Percentage of Sessions by UTM Source',
     labels={'UTM Source':'UTM Source', 'Percentage':'% of Total Sessions'},
     color='Percentage'
 )
 fig.update_traces(texttemplate='%{text}%', textposition='outside')
 fig.update_layout(yaxis=dict(title='% of Total Sessions'), xaxis=dict(title='UTM Source'))
 
-# ---- Card Styling ----
+# ---- Card container ----
 st.markdown("""
     <style>
     .chart-card {
+        background-color: #f0f2f6;
         padding: 20px;
         border-radius: 12px;
-        background-color: #f0f2f6;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         margin: 10px 0px;
+    }
+    .chart-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2e86de;
+        text-align: center;
+        margin-bottom: 10px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Display chart inside a "card"
-with st.container():
-    st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-    st.plotly_chart(fig, use_container_width=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+# Display chart inside card
+st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
+st.markdown("<div class='chart-title'>Percentage of Sessions by UTM Source</div>", unsafe_allow_html=True)
+st.plotly_chart(fig, use_container_width=True)
+st.markdown("</div>", unsafe_allow_html=True)
+
 
 
  
