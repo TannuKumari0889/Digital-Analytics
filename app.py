@@ -10,11 +10,9 @@ st.set_page_config(page_title="Digital Analytics Dashboard", layout="wide")
 # Sidebar Navigation
 # ----------------------------
 
+st.set_page_config(page_title="Digital Analytics Dashboard")
 
-# ----------------------------
-# Navigation Buttons
-# ----------------------------
-st.markdown("<div class='nav-buttons'>", unsafe_allow_html=True)
+st.title("Welcome to Digital Analytics Dashboard")
+st.write("Use the left sidebar to navigate through all analysis pages.")
 
-st.markdown("</div>", unsafe_allow_html=True)
 
