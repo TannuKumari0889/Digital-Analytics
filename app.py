@@ -532,8 +532,30 @@ elif page == "Marketing Analysis":
     # 1️⃣ Sessions by UTM Source
     # ----------------------
     
-    source_counts = df_sessions['utm_source'].value_counts()
-    st.bar_chart(source_counts)
+  
+source_counts = df_sessions['utm_source'].value_counts().reset_index()
+source_counts.columns = ['UTM Source', 'Sessions']
+total_sessions = source_counts['Sessions'].sum()
+source_counts['Percentage'] = (source_counts['Sessions'] / total_sessions * 100).round(2)
+
+# Plot using Plotly
+import plotly.express as px
+
+fig1 = px.bar(
+    source_counts,
+    x='UTM Source',
+    y='Percentage',
+    text='Percentage',
+    title='Percentage of Sessions by UTM Source',
+    labels={'UTM Source':'UTM Source', 'Percentage':'% of Total Sessions'},
+    color='Percentage'
+)
+
+fig1.update_traces(texttemplate='%{text}%', textposition='outside')
+fig1.update_layout(yaxis=dict(title='% of Total Sessions'), xaxis=dict(title='UTM Source'))
+
+st.plotly_chart(fig1, use_container_width=True)
+
  
 
 
