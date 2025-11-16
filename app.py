@@ -5,27 +5,6 @@ import plotly.express as px
 
 st.set_page_config(page_title="Digital Analytics Dashboard", layout="wide")
 
-# ------------------------------
-# LOAD DATA FROM GOOGLE DRIVE
-# ------------------------------
-@st.cache_data
-def load_data():
-
-    url_sessions = "https://drive.google.com/uc?export=download&id=1ajuAwYDnG78lu5pk0Y3_gc6r-m9kbEkz"
-    url_pageviews = "https://drive.google.com/uc?export=download&id=1NFDWdWzxY2GxtFXdcGXnksWrCblNKa6T"
-    url_products = "https://drive.google.com/uc?export=download&id=1mxpg1D7Q8aYX85yO_-WyjY14JTRkDZnH"
-    url_orders = "https://drive.google.com/uc?export=download&id=19_UTwIKYRYyxTN5nTHtN5zIZthMdbaTr"
-    url_items = "https://drive.google.com/uc?export=download&id=1UQlE-HZHeOD9AZwGVWY5UdQaSKKZwV77"
-    url_refunds = "https://drive.google.com/uc?export=download&id=1au0qZVSF7Z3Gb4riDuCjkJ1D61--M9Kn"
-
-    df_sessions = pd.read_csv(url_sessions)
-    df_pageviews = pd.read_csv(url_pageviews)
-    df_products = pd.read_csv(url_products)
-    df_orders = pd.read_csv(url_orders)
-    df_items = pd.read_csv(url_items)
-    df_refunds = pd.read_csv(url_refunds)
-
-    return df_sessions, df_pageviews, df_products, df_orders, df_items, df_refunds
 
 
 df_sessions, df_pageviews, df_products, df_orders, df_items, df_refunds = load_data()
