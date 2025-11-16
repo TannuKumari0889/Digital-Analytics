@@ -57,16 +57,7 @@ if page == "Welcome":
         """
     )
 
-    st.success("All six tables loaded successfully!")
-
-    st.subheader("Datasets Loaded:")
-    st.write("✔ Sessions:", df_sessions.shape)
-    st.write("✔ Pageviews:", df_pageviews.shape)
-    st.write("✔ Products:", df_products.shape)
-    st.write("✔ Orders:", df_orders.shape)
-    st.write("✔ Order Items:", df_items.shape)
-    st.write("✔ Refunds:", df_refunds.shape)
-
+    
 
 
 # ------------------------------
@@ -74,9 +65,8 @@ if page == "Welcome":
 # ------------------------------
 elif page == "Business Overview":
     st.title("🏢 Business Overview")
-
-    st.write("Here you will display KPIs like:")
-    st.write("- Total Revenue")
+    Total_Revenue=df_orders[price_usd].sum()
+    st.write("- Total Revenue",Total_Revenue)
     st.write("- Total Orders")
     st.write("- Average Order Value (AOV)")
     st.write("- Refund Rate")
