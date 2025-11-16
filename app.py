@@ -81,8 +81,8 @@ elif page == "Business Overview":
 
     cvr = Total_orders * 100 / df_sessions["website_session_id"].nunique()
 
-    Total_Profit = (df_orders["price_usd"] - df_orders["cogs_usd"]).sum()
-
+   Total_Profit = (df_orders["price_usd"] - df_orders["cogs_usd"]).sum()
+    Total_Profit_M = Total_Profit / 1_000_000
 
     # ---- KPI CARD STYLING ----
     st.markdown("""
@@ -148,8 +148,7 @@ elif page == "Business Overview":
             f"<div class='kpi-value'>{round(cvr,2)}%</div></div>",
             unsafe_allow_html=True
         )
-         Total_Profit = (df_orders["price_usd"] - df_orders["cogs_usd"]).sum()
-    Total_Profit_M = Total_Profit / 1_000_000
+         
     with col6:
         st.markdown(
             f"""
