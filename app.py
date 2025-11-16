@@ -177,8 +177,8 @@ elif page == "Business Overview":
 # -------------------------------
 # PAGE 3: PRODUCT ANALYSIS
 # -------------------------------
-elif page == "Product Analysis":
-    st.title("📦 Product Analysis")
+elif page == "Website Analysis":
+    st.markdown("<h1 style='text-align: center;'>📦Product Analysis</h1>", unsafe_allow_html=True)
     st.write("")
 
     # --- PRODUCT KPIs CALCULATION ---
