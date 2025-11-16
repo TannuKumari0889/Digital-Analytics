@@ -81,7 +81,7 @@ elif page == "Business Overview":
 
     cvr = Total_orders * 100 / df_sessions["website_session_id"].nunique()
 
-   Total_Profit = (df_orders["price_usd"] - df_orders["cogs_usd"]).sum()
+    Total_Profit = (df_orders["price_usd"] - df_orders["cogs_usd"]).sum()
     Total_Profit_M = Total_Profit / 1_000_000
 
     # ---- KPI CARD STYLING ----
