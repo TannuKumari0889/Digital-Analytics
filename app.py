@@ -1,119 +1,78 @@
 import streamlit as st
 import pandas as pd
 
-# Initialize session state page
-if "page" not in st.session_state:
-    st.session_state["page"] = "home"
+# -------- LOAD YOUR 6 TABLES AUTOMATICALLY ----------
+@st.cache_data
+def load_data():
+    df_refund = pd.read_csv("data/order_item_refunds.csv")  # corrected name
+    df_items = pd.read_csv("data/order_items.csv")
+    df_orders = pd.read_csv("data/orders.csv")
+    df_products = pd.read_csv("data/products.csv")
+    df_pageviews = pd.read_csv("data/website_pageviews.csv")
+    df_sessions = pd.read_csv("data/website_sessions_cleaned.csv")
+    return df_refund, df_items, df_orders, df_products, df_pageviews, df_sessions
 
-def go_to(page):
-    st.session_state["page"] = page
-if st.session_state["page"] == "home":
-    st.title("Digital Analytics Dashboard")
-    st.subheader("Welcome!")
+df_refund, df_items, df_orders, df_products, df_pageviews, df_sessions = load_data()
 
-    st.write("Upload all 6 tables to continue:")
+# --------- SIDEBAR NAVIGATION -----------
+st.sidebar.title("🔍 Navigation")
+page = st.sidebar.radio(
+    "Go to",
+    ["Welcome Page", "Business Overview", "Product Analysis", "Website Analysis", "Marketing Analysis"]
+)
 
-    refunds = st.file_uploader("1. order_items_refund.csv", type=["csv"])
-    items = st.file_uploader("2. order_items.csv", type=["csv"])
-    orders = st.file_uploader("3. orders.csv", type=["csv"])
-    products = st.file_uploader("4. products.csv", type=["csv"])
-    pageviews = st.file_uploader("5. website_pageviews.csv", type=["csv"])
-    sessions = st.file_uploader("6. website_sessions_cleaned.csv", type=["csv"])
+# --------- PAGE 1: WELCOME PAGE -----------
+if page == "Welcome Page":
+    st.title("👋 Welcome to Digital Analytics App")
+    st.write("Use the left sidebar to navigate across dashboards.")
+    st.write("This app uses your 6 tables to generate business insights.")
 
-    if refunds and items and orders and products and pageviews and sessions:
-        st.success("All files uploaded!")
+# --------- PAGE 2: BUSINESS OVERVIEW -----------
+elif page == "Business Overview":
+    st.title("📊 Business Overview")
 
-        st.session_state["df_refunds"] = pd.read_csv(refunds)
-        st.session_state["df_items"] = pd.read_csv(items)
-        st.session_state["df_orders"] = pd.read_csv(orders)
-        st.session_state["df_products"] = pd.read_csv(products)
-        st.session_state["df_pageviews"] = pd.read_csv(pageviews)
-        st.session_state["df_sessions"] = pd.read_csv(sessions)
-
-        st.write("Choose a section to start:")
-
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.button("Business Overview"):
-                go_to("overview")
-        with col2:
-            if st.button("Product Analysis"):
-                go_to("product")
-
-        col3, col4 = st.columns(2)
-        with col3:
-            if st.button("Website Analysis"):
-                go_to("website")
-        with col4:
-            if st.button("Marketing Analysis"):
-                go_to("marketing")
-    else:
-        st.info("Please upload all 6 files.")
-
-
-if st.session_state["page"] == "overview":
-    st.title("Business Overview")
-
-    df_orders = st.session_state["df_orders"]
-    df_sessions = st.session_state["df_sessions"]
-
-    st.subheader("Key Metrics")
-
-    total_orders = df_orders["order_id"].nunique()
-    total_revenue = df_orders["price_usd"].sum()
-    total_users = df_sessions["user_id"].nunique()
-
+    # KPIs
     col1, col2, col3 = st.columns(3)
-    col1.metric("Orders", total_orders)
-    col2.metric("Revenue", round(total_revenue, 2))
-    col3.metric("Users", total_users)
+    col1.metric("Total Orders", len(df_orders))
+    col2.metric("Total Products", len(df_products))
+    col3.metric("Total Sessions", len(df_sessions))
 
-    df_orders["date"] = pd.to_datetime(df_orders["created_at"]).dt.date
-    trend = df_orders.groupby("date")["order_id"].count()
+    # Revenue Trend
+    if "price_usd" in df_orders.columns:
+        st.subheader("Revenue Over Time")
+        df_orders["created_at"] = pd.to_datetime(df_orders["created_at"])
+        revenue = df_orders.groupby(df_orders["created_at"].dt.date)["price_usd"].sum()
+        st.line_chart(revenue)
 
-    st.subheader("Orders Trend")
-    st.line_chart(trend)
+# --------- PAGE 3: PRODUCT ANALYSIS -----------
+elif page == "Product Analysis":
+    st.title("📦 Product Analysis")
 
-    if st.button("⬅ Back"):
-        go_to("home")
+    df_merged = df_items.merge(df_products, on="product_id", how="left")
 
+    st.subheader("Top 10 Products by Revenue")
+    top_products = (
+        df_merged.groupby("product_name")["price_usd"]
+        .sum()
+        .sort_values(ascending=False)
+        .head(10)
+    )
+    st.bar_chart(top_products)
 
-if st.session_state["page"] == "product":
-    st.title("Product Analysis")
+# --------- PAGE 4: WEBSITE ANALYSIS -----------
+elif page == "Website Analysis":
+    st.title("🌐 Website Analytics")
 
-    df_items = st.session_state["df_items"]
-    df_products = st.session_state["df_products"]
+    df_pageviews["created_at"] = pd.to_datetime(df_pageviews["created_at"])
+    views_per_day = df_pageviews.groupby(df_pageviews["created_at"].dt.date)["website_pageview_id"].count()
 
-    st.subheader("Revenue by Product")
+    st.subheader("Daily Website Pageviews")
+    st.line_chart(views_per_day)
 
-    revenue = df_items.groupby("product_id")["price_usd"].sum()
-    st.bar_chart(revenue)
+# --------- PAGE 5: MARKETING ANALYSIS -----------
+elif page == "Marketing Analysis":
+    st.title("📣 Marketing Performance")
 
-    if st.button("⬅ Back"):
-        go_to("home")
-
-
-
-if st.session_state["page"] == "website":
-    st.title("Website Analysis")
-
-    df_pageviews = st.session_state["df_pageviews"]
-
-    st.subheader("Top Pageviews")
-    st.bar_chart(df_pageviews["pageview_url"].value_counts())
-
-    if st.button("⬅ Back"):
-        go_to("home")
-
-
-
-if st.session_state["page"] == "marketing":
-    st.title("Marketing Analysis")
-
-    df_sessions = st.session_state["df_sessions"]
-
-    st.subheader("Traffic by Source")
-    st.bar_chart(df_sessions["utm_source"].value_counts())
-
-    if st.button("⬅ Back"):
-        go_to("home")
+    st.subheader("Sessions by UTM Source")
+    utm = df_sessions.groupby("utm_source")["website_session_id"].count()
+    st.bar_chart(utm)
