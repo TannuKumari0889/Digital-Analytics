@@ -188,7 +188,7 @@ elif page == "Product Analysis":
 
     # BEST & LEAST PERFORMING PRODUCTS (BY REVENUE)
     product_revenue = (
-        df_order_items
+        df_items
         .groupby("product_id")["price_usd"]
         .sum()
         .reset_index()
@@ -206,7 +206,7 @@ elif page == "Product Analysis":
     # MOST REFUNDED PRODUCT
     refunds_with_products = (
         df_refunds
-        .merge(df_order_items[["order_item_id", "product_id"]], on="order_item_id", how="left")
+        .merge(df_items[["order_item_id", "product_id"]], on="order_item_id", how="left")
         .merge(df_products, on="product_id", how="left")
     )
 
@@ -222,7 +222,7 @@ elif page == "Product Analysis":
     Most_Refunded_Product = most_refunded_row["product_name"]
     Most_Refunded_Amount = most_refunded_row["refund_amount_usd"]
 
-    # --- KPI CARD STYLING (reuse your style) ---
+    # --- KPI CARD STYLING ---
     st.markdown("""
         <style>
         .kpi-card {
@@ -292,6 +292,9 @@ elif page == "Product Analysis":
             """,
             unsafe_allow_html=True
         )
+
+   
+
 
     
 
