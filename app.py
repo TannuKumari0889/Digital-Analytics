@@ -16,7 +16,7 @@ st.set_page_config(page_title="Digital Analytics Dashboard", layout="wide")
 st.sidebar.title("📊 Navigation")
 page = st.sidebar.radio(
     "Go to page:",
-    ["Welcome", "Business Overview", "Product Analysis", "Website Analysis", "Marketing Analysis"]
+    ["Home", "Business Overview", "Product Analysis", "Website Analysis", "Marketing Analysis"]
 )
 
 
