@@ -5,6 +5,8 @@ import numpy as np
 from data_tables import load_data
 sessions, pageviews, products, orders, items, refunds = load_data()
 
+st.title("📈 Business Overview")
+
 total_orders=len(orders['order_id'])
 total_revenue=orders['price_usd'].sum()
 
