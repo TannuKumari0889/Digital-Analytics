@@ -67,7 +67,7 @@ elif page == "Business Overview":
     st.title("🏢 Business Overview")
     Total_Revenue = df_orders["price_usd"].sum()
     Total_Revenue_M = Total_Revenue / 1_000_000
-    st.write("- Total Revenue (in Millions):", round(Total_Revenue_M, 2), "M")
+    st.write("- Total Revenue (in Millions):", round(Total_Revenue_M, 2),"M")
 
     st.write("- Total Orders")
     st.write("- Average Order Value (AOV)")
