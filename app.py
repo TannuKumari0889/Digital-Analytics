@@ -5,9 +5,9 @@ st.title("Digital Analytics Dashboard ")
 
 st.write("Upload all six tables below:")
 
-orders = st.file_uploader("Upload orders.csv", type=["csv"])
+refunds = st.file_uploader("Upload orders.csv", type=["csv"])
 order_items = st.file_uploader("Upload order_items.csv", type=["csv"])
-refunds = st.file_uploader("Upload order_items_refund.csv", type=["csv"])
+orders = st.file_uploader("Upload order_items_refund.csv", type=["csv"])
 products = st.file_uploader("Upload products.csv", type=["csv"])
 pageviews = st.file_uploader("Upload website_pageviews.csv", type=["csv"])
 sessions = st.file_uploader("Upload website_sessions_cleaned.csv", type=["csv"])
@@ -15,9 +15,9 @@ sessions = st.file_uploader("Upload website_sessions_cleaned.csv", type=["csv"])
 if orders and order_items and refunds and products and pageviews and sessions:
     st.success("All files uploaded successfully!")
 
-    df_refunds = pd.read_csv(orders)
+    df_refunds = pd.read_csv(refunds)
     df_items = pd.read_csv(order_items)
-    df_orders = pd.read_csv(refunds)
+    df_orders = pd.read_csv(orders)
     df_products = pd.read_csv(products)
     df_pageviews = pd.read_csv(pageviews)
     df_sessions = pd.read_csv(sessions)
