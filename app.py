@@ -15,15 +15,27 @@ sessions = st.file_uploader("Upload website_sessions_cleaned.csv", type=["csv"])
 if orders and order_items and refunds and products and pageviews and sessions:
     st.success("All files uploaded successfully!")
 
-    df_orders = pd.read_csv(orders)
+    df_refunds = pd.read_csv(orders)
     df_items = pd.read_csv(order_items)
-    df_refunds = pd.read_csv(refunds)
+    df_orders = pd.read_csv(refunds)
     df_products = pd.read_csv(products)
     df_pageviews = pd.read_csv(pageviews)
     df_sessions = pd.read_csv(sessions)
 
     st.write("### Preview of Orders")
+    st.dataframe(df_refunds.head())
+
+    st.write("### Preview of Sessions")
+    st.dataframe(df_items.head())
+
+    st.write("### Preview of Sessions")
     st.dataframe(df_orders.head())
+
+    st.write("### Preview of Sessions")
+    st.dataframe(df_products.head())
+
+    st.write("### Preview of Sessions")
+    st.dataframe(df_pageviews.head())
 
     st.write("### Preview of Sessions")
     st.dataframe(df_sessions.head())
