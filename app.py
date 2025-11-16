@@ -581,7 +581,6 @@ st.markdown("</div>", unsafe_allow_html=True)
     utm_campaign_counts.columns = ['Campaign','Sessions']
     utm_campaign_counts['Percentage'] = (utm_campaign_counts['Sessions'] / Total_Sessions * 100).round(2)
 
-
 fig2 = px.bar(
     utm_campaign_counts,
     x='Campaign',
@@ -593,6 +592,9 @@ fig2 = px.bar(
 )
 fig2.update_traces(texttemplate='%{text}%', textposition='inside')
 fig2.update_layout(title='Percentage of Sessions by Campaign', yaxis_title='% of Sessions', xaxis_title='Campaign')
+
+
+
 
 
 
