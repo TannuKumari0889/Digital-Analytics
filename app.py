@@ -65,7 +65,7 @@ if page == "Welcome":
 # ------------------------------
 elif page == "Business Overview":
     st.title("🏢 Business Overview")
-    Total_Revenue=df_orders[price_usd].sum()
+    Total_Revenue=df_orders["price_usd"].sum()
     st.write("- Total Revenue",Total_Revenue)
     st.write("- Total Orders")
     st.write("- Average Order Value (AOV)")
