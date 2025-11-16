@@ -26,7 +26,7 @@ col3.metric('Total Profit',total_profit,"M")
 col4.metric('Avg Order Value',round(AOV,2),"M")
 col5.metric('Refund Rate',round(refund_rate,2),"%")
 col6.metric('Coversion Rate',round(cvr,2),"%")
-col7.metric('Total Customers',total_customers)
+col7.metric('Total Customers',roun(total_customers/1000,2),"k")
 col8.metric('Repeat Customers',repeat_customers)
 
 
