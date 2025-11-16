@@ -21,8 +21,8 @@ col1,col2,col3,col4,col5,col6=st.columns(6)
 col1.metric('Total Orders',total_orders)
 col2.metric('Total Revenue',total_revenue,"M")
 col3.metric('Total Profit',total_profit,"M")
-col4.metric('Avg Order Value',AOV,"M")
-col5.metric('Refund Rate',refund_rate,"%")
-col6.metric('Coversion Rate',cvr,"%")
+col4.metric('Avg Order Value',round(AOV,2),"M")
+col5.metric('Refund Rate',round(refund_rate,2),"%")
+col6.metric('Coversion Rate',round(cvr,2),"%")
 
 
