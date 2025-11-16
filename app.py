@@ -311,10 +311,10 @@ elif page == "Product Analysis":
 
 
 # -------------------------------
-# PAGE 4: WEBSITE ANALYSIS
+# PAGE: WEBSITE ANALYSIS
 # -------------------------------
 elif page == "Website Analysis":
-    st.title("🌐 Website Analysis")
+    st.markdown("<h1 style='text-align: center;'>🌐 Website Analysis</h1>", unsafe_allow_html=True)
     st.write("")
 
     # --- KPI CALCULATIONS ---
@@ -322,27 +322,29 @@ elif page == "Website Analysis":
     # Total Sessions
     Total_Sessions = df_sessions["website_session_id"].nunique()
 
-    # Entry Page: first pageview of each session
+    # First pageview of each session → Top Entry Page
     first_pageviews = (
         df_pageviews.sort_values(["website_session_id", "created_at"])
         .groupby("website_session_id")
         .first()
         .reset_index()
     )
-    Top_Entry_Page_row = first_pageviews["pageview_url"].value_counts().reset_index().iloc[0]
-    Top_Entry_Page = Top_Entry_Page_row["index"]
-    Top_Entry_Page_Count = Top_Entry_Page_row["pageview_url"]
+    top_entry_counts = first_pageviews["pageview_url"].value_counts().reset_index()
+    top_entry_counts.columns = ["page", "count"]
+    Top_Entry_Page = top_entry_counts.loc[0, "page"]
+    Top_Entry_Page_Count = top_entry_counts.loc[0, "count"]
 
-    # Exit Page: last pageview of each session
+    # Last pageview of each session → Top Exit Page
     last_pageviews = (
         df_pageviews.sort_values(["website_session_id", "created_at"])
         .groupby("website_session_id")
         .last()
         .reset_index()
     )
-    Top_Exit_Page_row = last_pageviews["pageview_url"].value_counts().reset_index().iloc[0]
-    Top_Exit_Page = Top_Exit_Page_row["index"]
-    Top_Exit_Page_Count = Top_Exit_Page_row["pageview_url"]
+    top_exit_counts = last_pageviews["pageview_url"].value_counts().reset_index()
+    top_exit_counts.columns = ["page", "count"]
+    Top_Exit_Page = top_exit_counts.loc[0, "page"]
+    Top_Exit_Page_Count = top_exit_counts.loc[0, "count"]
 
     # Bounce Rate
     pageviews_per_session = df_pageviews.groupby("website_session_id")["website_pageview_id"].count()
@@ -352,19 +354,22 @@ elif page == "Website Analysis":
     Avg_Pages_Per_Session = df_pageviews.shape[0] / Total_Sessions
 
     # Top Device Type
-    Top_Device_Type_row = df_sessions["device_type"].value_counts().reset_index().iloc[0]
-    Top_Device_Type = Top_Device_Type_row["index"]
-    Top_Device_Count = Top_Device_Type_row["device_type"]
+    top_device_counts = df_sessions["device_type"].value_counts().reset_index()
+    top_device_counts.columns = ["device", "count"]
+    Top_Device_Type = top_device_counts.loc[0, "device"]
+    Top_Device_Count = top_device_counts.loc[0, "count"]
 
     # Top UTM Source
-    Top_UTM_Source_row = df_sessions["utm_source"].value_counts().reset_index().iloc[0]
-    Top_UTM_Source = Top_UTM_Source_row["index"]
-    Top_UTM_Source_Count = Top_UTM_Source_row["utm_source"]
+    top_utm_source_counts = df_sessions["utm_source"].value_counts().reset_index()
+    top_utm_source_counts.columns = ["utm_source", "count"]
+    Top_UTM_Source = top_utm_source_counts.loc[0, "utm_source"]
+    Top_UTM_Source_Count = top_utm_source_counts.loc[0, "count"]
 
     # Top UTM Campaign
-    Top_UTM_Campaign_row = df_sessions["utm_campaign"].value_counts().reset_index().iloc[0]
-    Top_UTM_Campaign = Top_UTM_Campaign_row["index"]
-    Top_UTM_Campaign_Count = Top_UTM_Campaign_row["utm_campaign"]
+    top_utm_campaign_counts = df_sessions["utm_campaign"].value_counts().reset_index()
+    top_utm_campaign_counts.columns = ["utm_campaign", "count"]
+    Top_UTM_Campaign = top_utm_campaign_counts.loc[0, "utm_campaign"]
+    Top_UTM_Campaign_Count = top_utm_campaign_counts.loc[0, "count"]
 
     # --- KPI CARD CSS ---
     st.markdown("""
@@ -390,7 +395,7 @@ elif page == "Website Analysis":
         </style>
     """, unsafe_allow_html=True)
 
-    # --- KPI GRID: 4x2 ---
+    # --- KPI GRID: 2 ROWS × 4 COLUMNS ---
     cols = st.columns(4)
     kpi_values = [
         ("Total Sessions", Total_Sessions),
@@ -403,7 +408,7 @@ elif page == "Website Analysis":
         ("Top UTM Campaign", f"{Top_UTM_Campaign} ({Top_UTM_Campaign_Count})"),
     ]
 
-    # Display cards in 2 rows
+    # Display cards in rows
     for i, (title, value) in enumerate(kpi_values):
         with cols[i % 4]:
             st.markdown(
@@ -417,6 +422,7 @@ elif page == "Website Analysis":
         # After 4 columns, reset for next row
         if i % 4 == 3:
             cols = st.columns(4)
+
 
 
 
