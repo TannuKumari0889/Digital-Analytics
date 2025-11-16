@@ -246,7 +246,7 @@ elif page == "Product Analysis":
         </style>
     """, unsafe_allow_html=True)
 
-  # --- 2 COLUMNS × 2 ROWS ---
+# --- 2 COLUMNS × 2 ROWS ---
 
 # ROW 1
 col1, col2 = st.columns(2)
@@ -299,10 +299,14 @@ with col4:
         unsafe_allow_html=True
     )
 
-   
 
 
-    
+
+
+
+
+
+
 
 
 
