@@ -20,7 +20,7 @@ repeat_customers = (orders['user_id'].value_counts() > 1).sum()
 
 #-kpis--------------
 col1,col2,col3,col4,col5,col6,col7,col8=st.columns(8)
-col1.metric('Total Orders',total_orders)
+col1.metric('Total Orders',round(total_orders/1000,2),"k")
 col2.metric('Total Revenue',total_revenue,"M")
 col3.metric('Total Profit',total_profit,"M")
 col4.metric('Avg Order Value',round(AOV,2),"M")
