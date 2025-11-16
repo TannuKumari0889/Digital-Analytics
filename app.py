@@ -1,19 +1,19 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Digital Analytics Dashboard ")
+st.title("Digital Analytics Dashboard")
 
-st.write("Upload all six tables below:")
+st.write("Upload all six tables below in the correct order:")
 
-refunds = st.file_uploader("Upload orders.csv", type=["csv"])
-order_items = st.file_uploader("Upload order_items.csv", type=["csv"])
-orders = st.file_uploader("Upload order_items_refund.csv", type=["csv"])
-products = st.file_uploader("Upload products.csv", type=["csv"])
-pageviews = st.file_uploader("Upload website_pageviews.csv", type=["csv"])
-sessions = st.file_uploader("Upload website_sessions_cleaned.csv", type=["csv"])
+refunds = st.file_uploader("1. Upload order_items_refund.csv", type=["csv"])
+order_items = st.file_uploader("2. Upload order_items.csv", type=["csv"])
+orders = st.file_uploader("3. Upload orders.csv", type=["csv"])
+products = st.file_uploader("4. Upload products.csv", type=["csv"])
+pageviews = st.file_uploader("5. Upload website_pageviews.csv", type=["csv"])
+sessions = st.file_uploader("6. Upload website_sessions_cleaned.csv", type=["csv"])
 
-if orders and order_items and refunds and products and pageviews and sessions:
-    st.success("All files uploaded successfully!")
+if refunds and order_items and orders and products and pageviews and sessions:
+    st.success("All 6 tables uploaded successfully!")
 
     df_refunds = pd.read_csv(refunds)
     df_items = pd.read_csv(order_items)
@@ -22,25 +22,12 @@ if orders and order_items and refunds and products and pageviews and sessions:
     df_pageviews = pd.read_csv(pageviews)
     df_sessions = pd.read_csv(sessions)
 
-    st.write("### Preview of Orders")
-    st.dataframe(df_refunds.head())
-
-    st.write("### Preview of Sessions")
-    st.dataframe(df_items.head())
-
-    st.write("### Preview of Sessions")
+    st.subheader("Preview: orders")
     st.dataframe(df_orders.head())
 
-    st.write("### Preview of Sessions")
-    st.dataframe(df_products.head())
-
-    st.write("### Preview of Sessions")
-    st.dataframe(df_pageviews.head())
-
-    st.write("### Preview of Sessions")
+    st.subheader("Preview: sessions")
     st.dataframe(df_sessions.head())
 
-    st.write("### Tables loaded successfully. Now you can build charts and KPIs.")
+    st.info("All tables loaded. Tell me when you're ready — I will add KPIs & charts next.")
 else:
-    st.info("Please upload all six tables to continue.")
-
+    st.warning("Please upload all 6 tables to continue.")
