@@ -177,7 +177,7 @@ elif page == "Business Overview":
 # -------------------------------
 # PAGE 3: PRODUCT ANALYSIS
 # -------------------------------
-elif page == "Website Analysis":
+elif page == "Product Analysis":
     st.markdown("<h1 style='text-align: center;'>📦Product Analysis</h1>", unsafe_allow_html=True)
     st.write("")
 
