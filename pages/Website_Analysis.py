@@ -29,7 +29,6 @@ col1,col2,col3=st.columns(3)
 col1.metric('Total Sessions',total_sessions)
 col2.metric('Bounce Rate',round(bounce_rate,2),"%")
 col3.metric('Top Entry Page',top_entry_page)
-col4.metric('Top Exit Page',top_exit_page)
 
 
 col1.metric('Top Traffic Source',top_traffic_source)
