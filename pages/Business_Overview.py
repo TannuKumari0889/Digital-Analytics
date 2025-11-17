@@ -56,18 +56,27 @@ items_per_order=len(items['order_item_id'])/total_orders
 total_margin=(orders['price_usd'].sum()-orders['cogs_usd'].sum())/(orders['price_usd'].sum())
 
 #-kpis--------------
-col1,col2,col3,col4,col5,col6=st.columns(6)
-col1.metric('Total Orders',round(total_orders/1000,2),"k")
-col2.metric('Total Revenue',total_revenue,"M")
-col3.metric('Total Profit',total_profit,"M")
-col4.metric('Avg Order Value',round(AOV,2),"$")
-col5.metric('Refund Rate',round(refund_rate,2),"%")
-col6.metric('Coversion Rate',round(cvr,2),"%")
+col1=st.columns(1)
+#,col2,col3,col4,col5,col6=st.columns(6)
+#col1.metric('Total Orders',round(total_orders/1000,2),"k")
+#col2.metric('Total Revenue',total_revenue,"M")
+#col3.metric('Total Profit',total_profit,"M")
+#col4.metric('Avg Order Value',round(AOV,2),"$")
+#col5.metric('Refund Rate',round(refund_rate,2),"%")
+#col6.metric('Coversion Rate',round(cvr,2),"%")
 
-col1.metric('Total Customers',round(total_customers/1000,2),"k")
-col2.metric('Repeat Customers',repeat_customers)
-col3.metric('Items per Order',round(items_per_order,2),"units")
-col4.metric('Total Margin',round(total_margin*100,2),"%")
+#col1.metric('Total Customers',round(total_customers/1000,2),"k")
+#col2.metric('Repeat Customers',repeat_customers)
+#col3.metric('Items per Order',round(items_per_order,2),"units")
+#col4.metric('Total Margin',round(total_margin*100,2),"%")
+
+with col1:
+    st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-label">Total Orders</div>
+            <div class="kpi-value">{total_orders:,.0f}</div>
+        </div>
+    """, unsafe_allow_html=True)
 
 
 
