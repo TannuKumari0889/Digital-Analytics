@@ -12,15 +12,15 @@ total_sessions=len(sessions['website_session_id'])
 bounces=(pageviews['website_session_id'].value_counts()==1).sum()
 bounce_rate=bounces/total_sessions*100
 
-page=website_pageviews.sort_values(['website_session_id','created_at'])
+page=pageviews.sort_values(['website_session_id','created_at'])
 entry=page.groupby('website_session_id').first()['pageview_url']
 top_entry_page=entry.value_counts().idxmax()
 
-page=website_pageviews.sort_values(['website_session_id','created_at'],ascending=False)
+page=pageviews.sort_values(['website_session_id','created_at'],ascending=False)
 exit=page.groupby('website_session_id').first()['pageview_url']
 top_exit_page=exit.value_counts().idxmax()
 
-top_traffic_source=website_sessions['utm_source'].value_counts().idxmax()
+top_traffic_source=sessions['utm_source'].value_counts().idxmax()
 
 
 col1,col2,col3,col4,col5=st.columns(5)
