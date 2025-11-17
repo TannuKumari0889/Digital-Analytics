@@ -80,7 +80,7 @@ with col2:
     st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">Total Revenue</div>
-            <div class="kpi-value">{total_revenue}</div>
+            <div class="kpi-value">{total_revenue,'M'}</div>
         </div>
     """, unsafe_allow_html=True)
     
