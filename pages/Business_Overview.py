@@ -20,7 +20,7 @@ st.markdown("""
     .kpi-card {
         background: #ffffff10;
         padding: 20px;
-        border-radius: 30px;
+        border-radius: 15px;
         text-align: center;
         border: 1px solid #ffffff20;
         backdrop-filter: blur(10px);
@@ -28,7 +28,7 @@ st.markdown("""
     }
 
     .kpi-value {
-        font-size: 32px;
+        font-size: 15px;
         font-weight: 700;
         margin-top: -10px;
     }
