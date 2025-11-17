@@ -21,3 +21,11 @@ exit=page.groupby('website_session_id').first()['pageview_url']
 top_exit_page=exit.value_counts().idxmax()
 
 top_traffic_source=website_sessions['utm_source'].value_counts().idxmax()
+
+
+col1,col2,col3,col4,col5=st.columns(5)
+col1.metric('Total Sessions',total_sessions)
+col2.metric('Bounce Rate',bounce_rate)
+col3.metric('Top Entry Page',top_entry_page)
+col4.metric('Top Exit Page',top_exit_page)
+col5.metric('Top Traffic Source',top_traffic_source)
