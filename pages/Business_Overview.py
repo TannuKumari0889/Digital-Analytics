@@ -19,7 +19,7 @@ st.markdown("""
     /* KPI CARD */
     .kpi-card {
         background: #ffffff10;
-        padding: 20px;
+        padding: 25px;
         border-radius: 15px;
         text-align: center;
         border: 1px solid #ffffff20;
