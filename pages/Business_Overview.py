@@ -104,7 +104,7 @@ with col5:
             <div class="kpi-value">{refund_rate:,.2f}%</div>
         </div>
     """, unsafe_allow_html=True)
-with col6:
+with col1:
     st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">Conversion Rate</div>
