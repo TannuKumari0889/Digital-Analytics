@@ -16,9 +16,9 @@ page=pageviews.sort_values(['website_session_id','created_at'])
 entry=page.groupby('website_session_id').first()['pageview_url']
 top_entry_page=entry.value_counts().idxmax()
 
-page=pageviews.sort_values(['website_session_id','created_at'],ascending=False)
-exit=page.groupby('website_session_id').first()['pageview_url']
-top_exit_page=exit.value_counts().idxmax()
+exit = pageviews.groupby('website_session_id').last()['pageview_url']
+top_exit_page = exit.value_counts().idxmax()
+
 
 top_traffic_source=sessions['utm_source'].value_counts().idxmax()
 
