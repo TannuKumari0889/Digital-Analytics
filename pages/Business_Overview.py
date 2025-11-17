@@ -57,16 +57,50 @@ st.markdown("""
 st.title("📈 Business Overview")
 
 
-total_orders=len(orders['order_id'])
-total_revenue=round(orders['price_usd'].sum()/1000000,2)
-total_profit=round((orders['price_usd'].sum()-orders['cogs_usd'].sum())/1000000,2)
-AOV=orders['price_usd'].sum()/total_orders
+
+
+# slicers
+# Convert to datetime
+sessions['created_at'] = pd.to_datetime(sessions['created_at'])
+orders['created_at'] = pd.to_datetime(orders['created_at'])
+items['created_at'] = pd.to_datetime(items['created_at'])
+
+# Extract year
+sessions['year'] = sessions['created_at'].dt.year
+orders['year'] = orders['created_at'].dt.year
+items['year']=items['created_at'].dt.year
+
+# Get all unique years from both tables
+all_years = sorted(pd.concat([sessions['year'], orders['year'],items['year']]).unique())
+
+# Sidebar multiselect
+selected_years = st.sidebar.multiselect("Select Year(s)", all_years)
+
+# Filter tables
+if selected_years:  # If user selected at least one year
+    sessions_filtered = sessions[sessions['year'].isin(selected_years)]
+    orders_filtered = orders[orders['year'].isin(selected_years)]
+    items_filtered = items[items['year'].isin(selected_years)]
+else:  # If nothing is selected, show all data
+    sessions_filtered = sessions
+    orders_filtered = orders
+    items_filtered = items
+
+st.write(f"Showing data for: {', '.join(map(str, selected_years)) if selected_years else 'All years'}")
+
+
+
+
+total_orders=len(orders_filtered['order_id'])
+total_revenue=round(orders_filtered['price_usd'].sum()/1000000,2)
+total_profit=round((orders_filtered['price_usd'].sum()-orders_filtered['cogs_usd'].sum())/1000000,2)
+AOV=orders_filtered['price_usd'].sum()/total_orders
 refund_rate=len(refunds['order_item_refund_id'])*100/total_orders
-cvr=total_orders*100/len(sessions['website_session_id'])
-total_customers=orders['user_id'].nunique()
-repeat_customers = (orders['user_id'].value_counts() > 1).sum()
-items_per_order=len(items['order_item_id'])/total_orders
-total_margin=(orders['price_usd'].sum()-orders['cogs_usd'].sum())/(orders['price_usd'].sum())
+cvr=total_orders*100/len(sessions_filtered['website_session_id'])
+total_customers=orders_filtered['user_id'].nunique()
+repeat_customers = (orders_filtered['user_id'].value_counts() > 1).sum()
+items_per_order=len(items_filtered['order_item_id'])/total_orders
+total_margin=(orders_filtered['price_usd'].sum()-orders_filtered['cogs_usd'].sum())/(orders_filtered['price_usd'].sum())
 
 #-kpis--------------
 col1,col2,col3,col4,col5,col6=st.columns(6)
@@ -124,7 +158,13 @@ with col6:
             <div class="kpi-value">{cvr:,.2f}%</div>
         </div>
     """, unsafe_allow_html=True)
-
+with col6:
+    st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-label">Conversion Rate</div>
+            <div class="kpi-value">{cvr:,.2f}%</div>
+        </div>
+    """, unsafe_allow_html=True)
 
 
 
