@@ -6,7 +6,7 @@ from data_tables import load_data
 sessions, pageviews, products, orders, items, refunds = load_data()
 
 ## KPI's Calculations--------------------
------------------------------------------
+##-----------------------------------------
 total_sessions=len(sessions['website_session_id'])
 
 bounces=(pageviews['website_session_id'].value_counts()==1).sum()
