@@ -33,18 +33,25 @@ st.markdown("""
         align-items: center;
     }
 
-    .kpi-value {
-        font-size: 32px;
-        font-weight: 700;
-        margin-top: -10px;
+    /* Prevent text from wrapping */
+    .kpi-label, .kpi-value {
+        white-space: nowrap;   /* <<< FIX */
     }
 
     .kpi-label {
         font-size: 15px;
         opacity: 0.8;
+        margin-bottom: 5px;
+    }
+
+    .kpi-value {
+        font-size: 32px;
+        font-weight: 700;
+        margin-top: -5px;
     }
     </style>
 """, unsafe_allow_html=True)
+
 
 
 st.title("📈 Business Overview")
