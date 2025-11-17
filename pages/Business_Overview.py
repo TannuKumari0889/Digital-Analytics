@@ -5,6 +5,42 @@ import numpy as np
 from data_tables import load_data
 sessions, pageviews, products, orders, items, refunds = load_data()
 
+import streamlit as st
+import pandas as pd
+
+# --- GLOBAL PAGE STYLE ---
+st.markdown("""
+    <style>
+    /* Page background */
+    .stApp {
+        background-color: #0b1e39; /* dark blue */
+    }
+
+    /* KPI CARD */
+    .kpi-card {
+        background: #ffffff10;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        border: 1px solid #ffffff20;
+        backdrop-filter: blur(10px);
+        color: white;
+    }
+
+    .kpi-value {
+        font-size: 32px;
+        font-weight: 700;
+        margin-top: -10px;
+    }
+
+    .kpi-label {
+        font-size: 15px;
+        opacity: 0.8;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 st.title("📈 Business Overview")
 
 
