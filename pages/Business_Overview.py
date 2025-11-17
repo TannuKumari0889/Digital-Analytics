@@ -19,18 +19,18 @@ st.markdown("""
     /* KPI CARD */
     .kpi-card {
         background: #ffffff10;
-        padding: 25px;
-        border-radius: 15px;
+        padding: 20px;
+        border-radius: 12px;
         text-align: center;
         border: 1px solid #ffffff20;
         backdrop-filter: blur(10px);
         color: white;
         max-width: 220px;
-        width: 100%;
         min-height: 150px;  
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
     .kpi-value {
