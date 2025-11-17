@@ -97,14 +97,14 @@ with col4:
             <div class="kpi-value">{AOV:,.2f}</div>
         </div>
     """, unsafe_allow_html=True)
-with col5:
+with col1:
     st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">Refund Rate</div>
             <div class="kpi-value">{refund_rate:,.2f}%</div>
         </div>
     """, unsafe_allow_html=True)
-with col1:
+with col2:
     st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">Conversion Rate</div>
