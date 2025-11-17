@@ -103,7 +103,7 @@ items_per_order=len(items_filtered['order_item_id'])/total_orders
 total_margin=(orders_filtered['price_usd'].sum()-orders_filtered['cogs_usd'].sum())/(orders_filtered['price_usd'].sum())
 
 #-kpis--------------
-col1,col2,col3,col4,col5,col6=st.columns(6)
+col1,col2,col3,col4,col5,col6,col7=st.columns(7)
 #col1.metric('Total Orders',round(total_orders/1000,2),"k")
 #col2.metric('Total Revenue',total_revenue,"M")
 #col3.metric('Total Profit',total_profit,"M")
@@ -158,7 +158,7 @@ with col6:
             <div class="kpi-value">{cvr:,.2f}%</div>
         </div>
     """, unsafe_allow_html=True)
-with col6:
+with col7:
     st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">Conversion Rate</div>
