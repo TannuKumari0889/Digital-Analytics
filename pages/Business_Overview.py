@@ -56,7 +56,7 @@ items_per_order=len(items['order_item_id'])/total_orders
 total_margin=(orders['price_usd'].sum()-orders['cogs_usd'].sum())/(orders['price_usd'].sum())
 
 #-kpis--------------
-col1,col2=st.columns(2)
+col1,col2,col3,col4,col5,col6=st.columns(6)
 #col1.metric('Total Orders',round(total_orders/1000,2),"k")
 #col2.metric('Total Revenue',total_revenue,"M")
 #col3.metric('Total Profit',total_profit,"M")
@@ -83,7 +83,35 @@ with col2:
             <div class="kpi-value">{total_revenue:,.2f}M</div>
         </div>
     """, unsafe_allow_html=True)
-    
+with col3:
+    st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-label">Total Profit</div>
+            <div class="kpi-value">{total_profit:,.2f}M</div>
+        </div>
+    """, unsafe_allow_html=True)
+with col4:
+    st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-label">Avg Order Value</div>
+            <div class="kpi-value">{AOV:,.2f}</div>
+        </div>
+    """, unsafe_allow_html=True)
+with col5:
+    st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-label">Refund Rate</div>
+            <div class="kpi-value">{refund_rate:,.2f}%</div>
+        </div>
+    """, unsafe_allow_html=True)
+with col6:
+    st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-label">Conversion Rate</div>
+            <div class="kpi-value">{cvr:,.2f}%</div>
+        </div>
+    """, unsafe_allow_html=True)
+
 
 
 
