@@ -25,6 +25,11 @@ st.markdown("""
         border: 1px solid #ffffff20;
         backdrop-filter: blur(10px);
         color: white;
+        width: 220px;       
+        min-height: 150px;  
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .kpi-value {
