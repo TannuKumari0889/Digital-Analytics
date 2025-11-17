@@ -57,7 +57,6 @@ total_margin=(orders['price_usd'].sum()-orders['cogs_usd'].sum())/(orders['price
 
 #-kpis--------------
 col1,col2=st.columns(2)
-#,col2,col3,col4,col5,col6=st.columns(6)
 #col1.metric('Total Orders',round(total_orders/1000,2),"k")
 #col2.metric('Total Revenue',total_revenue,"M")
 #col3.metric('Total Profit',total_profit,"M")
@@ -81,7 +80,7 @@ with col2:
     st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">Total Revenue</div>
-            <div class="kpi-value">{total_revenue:,.0f}</div>
+            <div class="kpi-value">{total_revenue}</div>
         </div>
     """, unsafe_allow_html=True)
     
