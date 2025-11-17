@@ -25,9 +25,11 @@ top_exit_page = exit.value_counts().idxmax()
 top_traffic_source=sessions['utm_source'].value_counts().idxmax()
 
 
-col1,col2,col3,col4,col5=st.columns(5)
+col1,col2,col3,col4=st.columns(4)
 col1.metric('Total Sessions',total_sessions)
 col2.metric('Bounce Rate',round(bounce_rate,2),"%")
 col3.metric('Top Entry Page',top_entry_page)
 col4.metric('Top Exit Page',top_exit_page)
-col5.metric('Top Traffic Source',top_traffic_source)
+
+
+col1.metric('Top Traffic Source',top_traffic_source)
