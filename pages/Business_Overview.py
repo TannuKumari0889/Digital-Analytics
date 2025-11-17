@@ -25,7 +25,8 @@ st.markdown("""
         border: 1px solid #ffffff20;
         backdrop-filter: blur(10px);
         color: white;
-        width: 220px;       
+        max-width: 220px;
+        width: 100%;
         min-height: 150px;  
         display: flex;
         flex-direction: column;
