@@ -91,3 +91,58 @@ Covered multiple digital analytics areas:
 - Business growth story
 - KPI-driven insights
 - Funding requirement and allocation strategy
+
+## 💸 Investment Plan & Allocation
+- Total Funding Required: $7M
+- Marketing & Branding – 35%
+- Product Development – 20%
+- Market Expansion – 20%
+- Technology Upgrades – 15%
+- Customer Retention – 10%
+  
+## 📊 Key Insights & Outcomes
+- Achieved 256% CAGR over 2 years
+- Projected 50% CAGR for next 3 years
+- Expected market size: $6.25M
+- Estimated valuation: $25–30M
+- Conversion rate improvement: 15–20%
+- Revenue per session increased to $4–5
+- 75% growth in sessions driven by optimization strategies
+  
+## 🚀 Deployment & Reporting
+- Published dashboards using Power BI Service
+- Built interactive dashboard using Streamlit App
+- Enabled real-time insights for stakeholders
+  
+## ⚠️ Challenges Faced
+- Understanding multi-table relational data
+- Mapping user journey across sessions and orders
+- Performing end-to-end funnel analysis
+- Aligning technical insights with business storytelling
+  
+## ✅ Solutions Implemented
+- Built structured data model for analysis
+- Applied EDA techniques for deep insights
+- Designed stakeholder-specific dashboards
+- Combined analytics with storytelling for investor pitch
+  
+📊 Power BI Dashboard
+👉 View Dashboard
+
+🌐 Streamlit App
+👉 View App
+
+📽️ Project Presentations
+👉 View End-to-End Analysis
+👉 View Digital Analytics Deep Dive
+👉 View Investment Pitch Deck
+
+## 💡 Key Learnings
+- End-to-end digital analytics workflow
+- Customer-centric analysis techniques
+- Data storytelling for business impact
+- Building dashboards for different stakeholders
+- Combining analytics with business strategy
+  
+## 📌 Conclusion
+This project demonstrates the ability to analyze digital business performance, build dashboards, and present insights effectively to stakeholders and investors, making it a complete end-to-end analytics solution.
