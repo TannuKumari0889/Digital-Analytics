@@ -38,7 +38,7 @@ The project uses a custom-built e-commerce database consisting of 6 related tabl
 - Website Pageviews
 
 ##### 🛒 Product Data
-Products
+- Products
 
 👉 These datasets enable end-to-end analysis from traffic → conversion → revenue
 
@@ -51,26 +51,27 @@ Products
 - PowerPoint – Stakeholder & investor presentations
   
 ## 🔍 Approach & Methodology
-1. Data Understanding & Cleaning
-Explored dataset relationships
-Cleaned and preprocessed data using SQL/Python
-Structured data for analysis
-2. Exploratory Data Analysis (EDA)
-Analyzed traffic sources, user behavior, and conversion funnel
-Identified patterns in customer journeys and engagement
-3. Dashboard Development
-
+##### 1. Data Understanding & Cleaning
+- Explored dataset relationships
+- Cleaned and preprocessed data using SQL/Python
+- Structured data for analysis
+  
+##### 2. Exploratory Data Analysis (EDA)
+- Analyzed traffic sources, user behavior, and conversion funnel
+- Identified patterns in customer journeys and engagement
+  
+##### 3. Dashboard Development
 Created stakeholder-specific dashboards:
 
-CEO Dashboard – High-level KPIs & growth metrics
-Marketing Dashboard – Channel performance & conversions
-Website Dashboard – Traffic & user behavior
-4. Advanced Analysis
-
+- CEO Dashboard – High-level KPIs & growth metrics
+- Marketing Dashboard – Channel performance & conversions
+- Website Dashboard – Traffic & user behavior
+- 
+##### 4. Advanced Analysis
 Covered multiple digital analytics areas:
 
-Customer segmentation (RFM, cohort, decile)
-Conversion funnel analysis
-Customer journey analysis
-CAC, CLV, retention & churn
-Channel attribution & engagement
+- Customer segmentation (RFM, cohort, decile)
+- Conversion funnel analysis
+- Customer journey analysis
+- CAC, CLV, retention & churn
+- Channel attribution & engagement
