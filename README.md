@@ -75,3 +75,19 @@ Covered multiple digital analytics areas:
 - Customer journey analysis
 - CAC, CLV, retention & churn
 - Channel attribution & engagement
+
+## 📊 Deliverables
+##### 📽️ 1. End-to-End Analysis Presentation
+- Data cleaning & preprocessing
+- EDA insights
+- Dashboard creation
+- Business recommendations
+  
+##### 📘 2. Digital Analytics Deep Dive
+- Comprehensive coverage of all analytics techniques
+- Theoretical understanding of e-commerce analytics
+  
+##### 💰 3. Investment Pitch Deck
+- Business growth story
+- KPI-driven insights
+- Funding requirement and allocation strategy
