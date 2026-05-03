@@ -14,9 +14,9 @@ Marketing Director – Campaign and channel optimization
 
 ##### The analytics team is responsible for:
 
-Tracking KPIs through dashboards
-Performing in-depth business analysis
-Supporting data-driven decision-making
+- Tracking KPIs through dashboards
+- Performing in-depth business analysis
+- Supporting data-driven decision-making
 
 ## 🎯 Business Objective
 - Monitor key business metrics and KPIs
@@ -28,25 +28,28 @@ Supporting data-driven decision-making
 ## 📂 Dataset Description
 The project uses a custom-built e-commerce database consisting of 6 related tables:
 
-📦 Orders Data
-Orders
-Order Items
-Order Item Refunds
-🌐 Website Data
-Website Sessions
-Website Pageviews
-🛒 Product Data
+##### 📦 Orders Data
+-Orders
+-Order Items
+-Order Item Refunds
+
+##### 🌐 Website Data
+-Website Sessions
+-Website Pageviews
+
+##### 🛒 Product Data
 Products
 
 👉 These datasets enable end-to-end analysis from traffic → conversion → revenue
 
-🛠️ Technology Stack
-Microsoft Excel – Data storage & organization
-SQL / Python – Data cleaning & exploratory analysis
-Power BI – Interactive dashboard development
-Power BI Service – Dashboard publishing
-Streamlit – Dashboard deployment & interaction
-PowerPoint – Stakeholder & investor presentations
+## 🛠️ Technology Stack
+- Microsoft Excel – Data storage & organization
+- SQL / Python – Data cleaning & exploratory analysis
+- Power BI – Interactive dashboard development
+- Power BI Service – Dashboard publishing
+- Streamlit – Dashboard deployment & interaction
+- PowerPoint – Stakeholder & investor presentations
+  
 🔍 Approach & Methodology
 1. Data Understanding & Cleaning
 Explored dataset relationships
