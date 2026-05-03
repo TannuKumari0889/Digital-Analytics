@@ -130,7 +130,7 @@ Covered multiple digital analytics areas:
 👉 [View Dashboard](https://app.powerbi.com/view?r=eyJrIjoiMmQ2ZDk2M2UtYTgyMy00MDY4LTlmMzMtNTcwMmMwZDUxOGZjIiwidCI6ImM0MmU1MWEzLTEyYWItNGY4NC1hNDU2LWI4OWYzMjEwMzgwNiJ9)
 
 ## 🌐 Streamlit App
-👉 View App
+👉 [View App](https://bearanalytics.streamlit.app/)
 
 ## 📽️ Project Presentations
 👉 View End-to-End Analysis
