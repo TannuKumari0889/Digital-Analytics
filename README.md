@@ -133,9 +133,9 @@ Covered multiple digital analytics areas:
 👉 View App
 
 ## 📽️ Project Presentations
-👉 View End-to-End Analysis
-👉 View Digital Analytics Deep Dive
-👉 View Investment Pitch Deck
+-- 👉 View End-to-End Analysis
+-- 👉 View Digital Analytics Deep Dive
+-- 👉 View Investment Pitch Deck
 
 ## 💡 Key Learnings
 - End-to-end digital analytics workflow
