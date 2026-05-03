@@ -66,7 +66,7 @@ Created stakeholder-specific dashboards:
 - CEO Dashboard – High-level KPIs & growth metrics
 - Marketing Dashboard – Channel performance & conversions
 - Website Dashboard – Traffic & user behavior
-- 
+  
 ##### 4. Advanced Analysis
 Covered multiple digital analytics areas:
 
