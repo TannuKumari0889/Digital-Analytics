@@ -4,29 +4,28 @@ This project focuses on analyzing digital performance for a newly launched e-com
 
 The primary goal was to support business growth and funding strategy by building dashboards, performing detailed analysis, and presenting insights in a compelling way to stakeholders and investors.
 
-🎯 Business Context
-
+## 🎯 Business Context
 The company aims to secure the next round of funding and requires strong analytical support to demonstrate growth and business potential.
 
-Key stakeholders:
-
+##### Key stakeholders:
 CEO (Cindy Sharp) – Strategic decision-making & investor communication
 Website Manager – Website performance tracking
 Marketing Director – Campaign and channel optimization
 
-The analytics team is responsible for:
+##### The analytics team is responsible for:
 
 Tracking KPIs through dashboards
 Performing in-depth business analysis
 Supporting data-driven decision-making
-🎯 Business Objective
-Monitor key business metrics and KPIs
-Analyze customer behavior and website performance
-Evaluate marketing channel effectiveness
-Support investor pitch with data-backed insights
-Identify growth opportunities and optimization areas
-📂 Dataset Description
 
+## 🎯 Business Objective
+- Monitor key business metrics and KPIs
+- Analyze customer behavior and website performance
+- Evaluate marketing channel effectiveness
+- Support investor pitch with data-backed insights
+- Identify growth opportunities and optimization areas
+  
+## 📂 Dataset Description
 The project uses a custom-built e-commerce database consisting of 6 related tables:
 
 📦 Orders Data
