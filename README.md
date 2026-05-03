@@ -126,13 +126,13 @@ Covered multiple digital analytics areas:
 - Designed stakeholder-specific dashboards
 - Combined analytics with storytelling for investor pitch
   
-📊 Power BI Dashboard
+## 📊 Power BI Dashboard
 👉 View Dashboard
 
-🌐 Streamlit App
+## 🌐 Streamlit App
 👉 View App
 
-📽️ Project Presentations
+## 📽️ Project Presentations
 👉 View End-to-End Analysis
 👉 View Digital Analytics Deep Dive
 👉 View Investment Pitch Deck
