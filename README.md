@@ -133,7 +133,7 @@ Covered multiple digital analytics areas:
 👉 [View App](https://bearanalytics.streamlit.app/)
 
 ## 📽️ Project Presentations
-👉 View End-to-End Analysis
+👉 [View End-to-End Analysis](https://github.com/TannuKumari0889/Digital-Analytics/raw/main/Stakeholder%20PPT.pptx)
 
 
 👉 View Digital Analytics Deep Dive
