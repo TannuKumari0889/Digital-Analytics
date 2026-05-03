@@ -136,9 +136,6 @@ Covered multiple digital analytics areas:
 👉 [View End-to-End Analysis](https://github.com/TannuKumari0889/Digital-Analytics/raw/main/Stakeholder%20PPT.pptx)
 
 
-👉 View Digital Analytics Deep Dive
-
-
 👉 [View Investment Pitch Deck](https://github.com/TannuKumari0889/Digital-Analytics/raw/main/3rd%20ppt%20(Investment%20Pitch%20Deck)%20(1).pptx)
 
 ## 💡 Key Learnings
