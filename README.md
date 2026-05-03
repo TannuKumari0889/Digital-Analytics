@@ -29,13 +29,13 @@ Marketing Director – Campaign and channel optimization
 The project uses a custom-built e-commerce database consisting of 6 related tables:
 
 ##### 📦 Orders Data
--Orders
--Order Items
--Order Item Refunds
+- Orders
+- Order Items
+- Order Item Refunds
 
 ##### 🌐 Website Data
--Website Sessions
--Website Pageviews
+- Website Sessions
+- Website Pageviews
 
 ##### 🛒 Product Data
 Products
@@ -50,7 +50,7 @@ Products
 - Streamlit – Dashboard deployment & interaction
 - PowerPoint – Stakeholder & investor presentations
   
-🔍 Approach & Methodology
+## 🔍 Approach & Methodology
 1. Data Understanding & Cleaning
 Explored dataset relationships
 Cleaned and preprocessed data using SQL/Python
