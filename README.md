@@ -1,5 +1,5 @@
 # 📊 Digital Analytics Project – E-commerce Startup
-### 🛍️ Project Overview
+## 🛍️ Project Overview
 This project focuses on analyzing digital performance for a newly launched e-commerce startup selling stuffed animal toys.
 
 The primary goal was to support business growth and funding strategy by building dashboards, performing detailed analysis, and presenting insights in a compelling way to stakeholders and investors.
